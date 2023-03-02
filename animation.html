@@ -1,0 +1,42 @@
+<!Document.html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        
+        function anim()
+        {
+            let a=document.getElementById("aa")
+            console.log("Hii")
+            document.getElementById("point").style.width="500px";
+            s="rotate("+a.value+"deg"+")" 
+          
+document.getElementById("point").style.transform=s
+        }
+    </script>
+    <style>
+        #point {
+            width: 6px;
+            height: 6px;
+            background: tomato;
+            border-radius: 50%;
+            transition: width 3s ease;
+            position: relative;
+            margin-top: 10%;
+            margin-left: 50%;
+        }
+
+       
+        
+    </style>
+   
+</head>
+
+<body>
+    <div id="point"></div>
+    <input id="aa"> </input>
+    <button onClick="anim()">animate</button>
+   
+</body>
+</html>

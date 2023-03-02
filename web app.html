@@ -1,0 +1,447 @@
+<!Document.html>
+    <html>
+
+    <head>
+        <meta charset="UTF-8">
+        <h1 id="head">
+
+            Let's Play Tic Tac Toe
+
+        </h1>
+        <script>
+            let arr = new Array();
+            let i = 1, winner, c, d
+            let activeDotRow = null
+            let activeDotColumn = null
+            let flag = 0
+            let flag1 = 0
+            arr = document.getElementsByClassName("box");
+
+            function getname() {
+
+                c = window.sessionStorage.getItem("player1")
+                console.log(c)
+                d = window.sessionStorage.getItem("player2")
+                console.log(d)
+                winner = window.sessionStorage.getItem("win")
+                console.log(winner)
+                var txt = "player 1 is " + c
+
+                tx1 = 'player 2 is ' + d;
+                alert(txt + '  ' +
+                    tx1)
+                decider();
+            }
+
+            function dec(m) {
+
+                cc = "X";
+                dd = "O";
+
+                if (i % 2 != 0) {
+                    let a = document.getElementById(m).value = cc;
+                    console.log(document.getElementById("x-color").value, "c-xolor")
+                    document.getElementById(m).style.color = document.getElementById("x-color").value;
+                    document.getElementById(m).setAttribute("disabled", "true")
+                }
+                else {
+                    document.getElementById(m).value = dd;
+                    let b = document.getElementById("o-color").value
+                    document.getElementById(m).style.color = b
+                    document.getElementById(m).setAttribute("disabled", "true")
+                }
+                ++i
+                win();
+            }
+
+            function reset() {
+                let k = 0;
+                for (i = 0; i < 9; i++) {
+                    arr[i].removeAttribute("disabled");
+                    arr[i].value = null;
+
+                }
+                if (activeDotRow != null) {
+
+                    document.getElementsByClassName("line-row")[activeDotRow].style.width = 0
+                }
+                else if (flag != 0) document.getElementById("l-dig").style.width = 0
+
+                else if (flag1 != 0) document.getElementById("r-dig").style.width = 0
+                else if (activeDotColumn != 0) {
+
+                    document.getElementsByClassName("lc")[activeDotColumn - 1].style.height = 0
+                }
+                else {
+                    document.getElementById("tog-col").style.height = 0
+                }
+
+
+
+                activeDotRow = null;
+                activeDotColumn = null
+                flag = 0
+                flag1 = 0
+            }
+
+            function win() {
+
+                let i = 0, j = 0;
+                let c = "XXX";
+                let d = "OOO";
+
+                let vx = arr[0].value + arr[4].value + arr[8].value;
+                let cx = arr[2].value + arr[4].value + arr[6].value;
+                while (i < 7 && j < 3) {
+
+                    let ch = arr[i].value + arr[i + 1].value + arr[i + 2].value;
+                    let dh = arr[j].value + arr[j + 3].value + arr[j + 6].value;
+
+
+                    if (ch === c || ch === d) {
+                        console.log("win row");
+                        let arr = document.getElementsByClassName("line-row")
+
+                        arr[j].style.visibility = "visible"
+                        arr[j].style.width = "1530px"
+                        activeDotRow = j
+                        printname(ch)
+                        break
+                    }
+                    else if (dh === c || dh === d) {
+                        console.log("win column");
+                        let arr = document.getElementsByClassName("lc")
+                        if (j > 0) {
+                            arr[j - 1].style.visibility = "visible"
+                            arr[j - 1].style.height = "750px"
+                        }
+                        else {
+                            document.getElementById("tog-col").style.visibility = "visible"
+                            document.getElementById("tog-col").style.height = "750px";
+                        }
+                        activeDotColumn = j
+                        // else
+                        // arr[j - 1].style.height = "1530px"
+                        printname(dh)
+                        break;
+                    }
+                    else {
+
+                        i = i + 3;
+                        j = j + 1;
+
+                    }
+                }
+                if (vx === c || vx === d) {
+                    document.getElementById("l-dig").style.visibility = "visible"
+                    document.getElementById("l-dig").style.width = "2100px"
+                    console.log(i);
+                    flag = 1
+                    printname(vx)
+                }
+                else if (cx == c || cx == d) {
+                    document.getElementById("r-dig").style.visibility = "visible"
+                    document.getElementById("r-dig").style.width = "2100px"
+                    console.log(i);
+                    flag1 = 1
+                    printname(cx)
+                }
+                // else
+                // console.log("you loose")
+
+            }
+            function printname(i) {
+
+                if (i === "XXX" && winner === "1") {
+
+                    alert(c + " Has Won The Game")
+                }
+                else if (i === "XXX" && winner === "0") {
+
+                    alert(d + " Has Won The Game")
+                }
+                else if (winner == 1) {
+                    alert(d + " Has Won The Game")
+                }
+                else {
+
+                    alert(c + " Has Won The Game")
+                }
+
+            }
+
+            function setting() {
+                document.getElementById("settings").style.visibility = "visible"
+
+            }
+            function hidesetting() {
+                document.getElementById("settings").style.visibility = "hidden"
+
+            }
+            function decider() {
+                if (winner == 1) {
+                    let decider = document.getElementById("play-1")
+                    let decider2 = document.getElementById("play-2")
+                    decider.innerHTML = "player 1 is X"
+                    decider2.innerHTML = "player 2 is O"
+
+                }
+                else {
+                    let decider = document.getElementById("play-1")
+                    let decider2 = document.getElementById("play-2")
+                    decider.innerHTML = "player 2 is X"
+                    decider2.innerHTML = "player 1 is O"
+
+                }
+            }
+
+        </script>
+
+        <style>
+            #finalresults {
+                font-size: 50px;
+            }
+
+            #head {
+                font-size: 78px;
+                text-align: center;
+                color: red;
+            }
+
+            .styles {
+                height: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                border: 4px solid black;
+                margin-left: 2%;
+                width: 96%;
+
+            }
+
+            input.middle:focus {
+                outline: white
+            }
+
+            table {
+                border: none;
+                border-collapse: collapse;
+                height: 70%;
+            }
+
+            .middle_column {
+                border-left: 4px solid purple;
+                border-right: 4px solid purple;
+                border-collapse: collapse;
+
+            }
+
+            .middle_row {
+
+                border-bottom: 4px solid purple;
+                border-top: 4px solid purple;
+                border-collapse: collapse;
+            }
+
+            input {
+                cursor: pointer;
+                border: none;
+                text-align: center;
+                font-size: 70px;
+                height: 76%;
+            }
+
+            .style_row {
+                height: 80%;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+
+            }
+
+            #l-dig {
+                width: 6px;
+                height: 6px;
+                border-radius: 3px;
+                background: red;
+                margin-left: 2%;
+                transition: width 2s ease;
+                position: absolute;
+                transform: rotate(22.2deg);
+
+                transform-origin: 0 0;
+                visibility: hidden;
+            }
+
+            #r-dig {
+                width: 6px;
+                height: 6px;
+                border-radius: 3px;
+                background: red;
+                margin-left: 16%;
+                transition: width 2s ease;
+                position: absolute;
+                transform: rotate(156.9deg);
+
+                transform-origin: 0 0;
+                margin-top: 14.1;
+                visibility: hidden;
+            }
+
+            #but {
+
+                width: 33%;
+                text-align: center;
+                height: 7%;
+                font-size: 78px;
+                color: white;
+                background-color: light orange;
+                margin-left: 35%;
+            }
+
+            .line-row {
+                width: 6px;
+                height: 6px;
+                border-radius: 3px;
+                background: black;
+                margin-left: 2%;
+                transition: width 2s ease;
+                position: absolute;
+                margin-left: 10%;
+                margin-top: 3%;
+                visibility: hidden;
+            }
+
+            .lc {
+                width: 6px;
+                height: 6px;
+                border-radius: 3px;
+                background: black;
+                margin-left: 2%;
+                transition: height 2s ease;
+                position: absolute;
+                margin-left: 10%;
+                margin-top: 2%;
+                visibility: hidden;
+
+
+            }
+
+            #tog-col {
+                width: 6px;
+                height: 6px;
+                border-radius: 3px;
+                background: black;
+                margin-left: 2%;
+                transition: height 2s ease;
+                position: absolute;
+                margin-left: 10%;
+                margin-top: 2%;
+                visibility: hidden;
+            }
+
+            #settings-button {
+
+                width: 4%;
+                height: 7%;
+
+                margin-top: 0%;
+
+            }
+
+            #settings {
+                visibility: hidden;
+                margin-top: -1%;
+            }
+
+            #x-color {
+                width: 4%;
+                height: 50%;
+
+                margin-top: 1%;
+            }
+
+            #o-color {
+                width: 4%;
+                height: 50%;
+
+            }
+
+            #app-button {
+                width: 4%;
+                height: 50%;
+            }
+
+            #play-1 {
+                margin-left: 94%;
+                font-size: 196%;
+            }
+
+            #play-2 {
+                margin-left: 94%;
+                font-size: 196%;
+            }
+        </style>
+
+
+    </head>
+
+    <body onload="getname()">
+
+        <div class="styles">
+            <button onclick="setting()" id="settings-button" style="background:none"><img src="./settings.png"
+                    height="auto" width="77%"></button>
+            <div id="settings">
+                <input id="x-color" type="color">
+                <input id="o-color" type="color">
+
+                <button onclick="hidesetting()" id="app-button">APPLY</button>
+            </div>
+            <div id="play-1">
+
+            </div>
+            <div id="play-2"></div>
+            <div class="style_row">
+
+                <table>
+                    <tr>
+                        <td>
+                            <div class=" line-row "></div>
+                            <div id="tog-col"></div>
+                            <div id="l-dig"></div><input id="1" onClick="dec(id)" readonly class="box" />
+                        </td>
+                        <td class="middle_column ">
+                            <div class="lc"></div> <input id="2" onClick="dec(id)" readonly class="box" />
+                        </td>
+                        <td>
+                            <div class="lc"></div>
+                            <div id="r-dig"></div> <input id="3" onClick="dec(id)" readonly class="box" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="middle_row">
+                            <div class="line-row"></div><input id="4" onClick="dec(id)" readonly class="box" />
+                        </td>
+                        <td class="middle_column middle_row"> <input id="5" onClick="dec(id)" readonly class="box" />
+                        </td>
+                        <td class="middle_row"> <input id="6" onClick="dec(id)" readonly class="box" /> </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="line-row"></div><input id="7" onClick="dec(id)" readonly class="box" />
+                        </td>
+                        <td class="middle_column"> <input id="8" onClick="dec(id)" readonly class="box" /> </td>
+                        <td> <input id="9" onClick="dec(id)" readonly class="box" /> </td>
+
+                    </tr>
+                </table>
+
+            </div>
+            <button onClick="reset()" id="but"> Reset </button>
+        </div>
+        <p id="finalresults"></p>
+    </body>

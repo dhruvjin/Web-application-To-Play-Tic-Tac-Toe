@@ -1,0 +1,159 @@
+<Document.html>
+
+    <head>
+        <meta charset="UTF-8">
+        <script>
+
+            let c, d,winner;
+            function print(m) {
+
+                if (m === "1") {
+                    
+                    c = document.getElementById(m).value
+                    console.log(c)
+            
+                }
+                else {
+                    
+                    d = document.getElementById(m).value
+                    console.log(d)
+                    
+                }
+
+
+            }
+            function changepage() {
+                window.location.href = "file:///D:/3rd%20sem%20project/web%20app.html"
+
+            }
+            function incapacitate() {
+                document.getElementById("pay").setAttribute("disabled", "true")
+               
+            }
+           
+           // let result=document.getElementById("result");
+           function tosswinner()
+           {
+            let tosswin=document.getElementById("tosswinner");
+            let num=parseInt(Math.floor(Math.random()*10));
+            console.log(num)
+            if (num<5){
+                winner="1"
+                  tosswin.innerHTML="Player 1 won the toss ";
+                  console.log(winner)}
+
+              else{
+                  winner="0"
+                   tosswin.innerHTML="PLayer 2 won the toss";
+                   console.log(winner)
+              }   
+              window.sessionStorage.setItem("win",winner)
+           }
+           function storename() {
+               
+                window.sessionStorage.setItem("player1", c)
+                window.sessionStorage.setItem("player2", d)
+               
+                document.getElementById("pay").removeAttribute("disabled")
+
+            }
+
+            
+        </script>
+        <h1 id="head">
+            Welcome to tic tac toe
+        </h1>
+
+    <body onload="incapacitate()">
+        <style>
+#coinallign{
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+height:112%;
+
+}
+            #coin{
+
+                width:30%;
+               
+                display: flex;
+                flex-direction: row;
+                justify-content:flex-end;
+            }
+            .font {
+                font-size: 76%;
+
+            }
+
+            #head {
+                font-size: 50px;
+                text-align: center;
+
+            }
+
+            .h {
+                width: 22%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                font-size: 30px;
+                border: 2px solid black;
+            }
+
+            .v {
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 30%;
+            }
+
+            .middle {
+                height: 40%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .align {
+                height: 77%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        </style>
+        <div class="align">
+            <div class="middle">
+                <div class="h">
+                    <div calss="v">
+                        <div class="font">
+                            <p> Enter your name player 1 </p>
+                            <input id="1" onchange="print(id)" />
+                            <p> Enter your name palyer 2 </p>
+                            <input id="2" onchange="print(id)" />
+                        </div>
+                        <br />
+                        <button onClick="storename()"> confirm name </button>
+                        <button onclick="changepage()" id="pay">Play
+                        </button>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            <div id="coinallign">
+            <div id="coin">
+            <button onclick="tosswinner()" > Toss</button>
+        </div>
+        <br >
+        <br>
+        <br>     
+        <div id ="tosswinner"></div>
+        <br>
+        <br>
+            <div id="result"></div>
+               
+       
+    </div>
+    </body>

@@ -1,0 +1,18 @@
+<html>
+<head>
+
+<style>
+.point{
+width:6px;
+height: 6px;
+background:tomato;
+border-radius: 3px;
+transition: width is ease;
+}
+
+
+</style>
+</head>
+<body>
+<div class="point"></div>
+</body>
